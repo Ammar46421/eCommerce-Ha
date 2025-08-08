@@ -1,20 +1,29 @@
 import { useState } from "react";
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "/vite.svg";
 import "./App.css";
+
+// Components
 import Navbar from "./components/navbar/Navbar.jsx";
-// import Cart from "./components/cart/Cart.jsx"
 import HeroSection from "./components/HeroSection/HeroSection.jsx";
+import SignIn from "./components/signin/SignIn.jsx"; // ✅ Import your SignIn component
+
+// React Router
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div>
-      <Navbar />
-      {/* <Cart/> */}
-      <HeroSection/>
-    </div>
+    <Router>
+      <Navbar /> {/* Always visible */}
+
+      <Routes>
+        <Route path="/" element={<HeroSection />} />
+        <Route path="/signin" element={<SignIn />} />
+        {/* You can add more routes below */}
+        {/* <Route path="/shop" element={<Shop />} /> */}
+        {/* <Route path="/cart" element={<Cart />} /> */}
+      </Routes>
+    </Router>
   );
 }
 
