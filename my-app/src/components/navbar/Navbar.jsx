@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { RiShoppingCart2Fill } from "react-icons/ri";
 
 const Navbar = () => {
+  const [query, setQuery] = useState("");
+
+  const handleSearch = () => {
+    alert("Searching for: " + query);
+    setQuery(""); // Clear input after search
+  };
+
   return (
     <nav className="w-full">
       {/* Upper Navbar */}
       <div className="bg-orange-500/70 py-3 px-6 sm:px-12">
         <div className="max-w-[1280px] mx-auto grid grid-cols-3 items-center">
-          
           {/* Logo */}
           <a
             href="#"
@@ -21,10 +27,17 @@ const Navbar = () => {
           <div className="relative group hidden sm:block justify-self-center">
             <input
               type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
               placeholder="Search..."
               className="w-[200px] group-hover:w-[300px] transition-all duration-500 rounded-full border border-gray-300 px-10 py-2 focus:outline-none focus:border-orange-400 bg-white"
             />
-            <IoSearch className="text-gray-500 group-hover:text-orange-500 absolute top-1/2 right-4 -translate-y-1/2 pointer-events-none text-xl" />
+            <button
+              onClick={handleSearch}
+              className="absolute top-1/2 right-2 -translate-y-1/2 text-gray-500 hover:text-orange-500 transition-colors"
+            >
+              <IoSearch className="text-xl" />
+            </button>
           </div>
 
           {/* Cart Button */}
