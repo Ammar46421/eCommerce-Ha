@@ -5,7 +5,7 @@ import "./App.css";
 import Navbar from "./components/navbar/Navbar.jsx";
 import HeroSection from "./components/HeroSection/HeroSection.jsx";
 import SignIn from "./components/signin/SignIn.jsx"; // ✅ Import your SignIn component
-
+import Footer from "./components/footer/Footer.jsx";
 // React Router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -23,6 +23,7 @@ function App() {
         {/* <Route path="/shop" element={<Shop />} /> */}
         {/* <Route path="/cart" element={<Cart />} /> */}
       </Routes>
+      <Footer/>
     </Router>
   );
 }
