@@ -3,10 +3,9 @@ import "./App.css";
 
 // Components
 import Navbar from "./components/navbar/Navbar.jsx";
-import HeroSection from "./components/HeroSection/HeroSection.jsx";
-import SignIn from "./components/signin/SignIn.jsx"; // ✅ Import your SignIn component
-import Footer from "./components/footer/Footer.jsx";
-import ProductsSection from "./components/ProductsSection/ProductsSection.jsx";
+import SignIn from "./components/signin/SignIn.jsx"; 
+import HeroSection from "./components/hero/HeroSection.jsx"; // ✅ Import HeroSection
+
 // React Router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -18,14 +17,12 @@ function App() {
       <Navbar /> {/* Always visible */}
 
       <Routes>
+        {/* Home page */}
         <Route path="/" element={<HeroSection />} />
+
+        {/* SignIn page */}
         <Route path="/signin" element={<SignIn />} />
-        {/* You can add more routes below */}
-        {/* <Route path="/shop" element={<Shop />} /> */}
-        {/* <Route path="/cart" element={<Cart />} /> */}
       </Routes>
-      <ProductsSection />
-      <Footer/>
     </Router>
   );
 }
