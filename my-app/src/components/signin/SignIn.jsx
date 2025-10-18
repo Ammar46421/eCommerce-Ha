@@ -1,31 +1,46 @@
 import React, { useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../../firebase/firebaseConfig_TEMP";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [isSignUp, setIsSignUp] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", password: "" });
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isSignUp) {
-      alert(`👤 Name: ${formData.name}\n📧 Email: ${formData.email}\n🔑 Password: ${formData.password}`);
-    } else {
-      alert(`📧 Email: ${formData.email}\n🔑 Password: ${formData.password}`);
+    try {
+      if (isSignUp) {
+        const userCred = await createUserWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password
+        );
+        await updateProfile(userCred.user, { displayName: formData.name });
+        alert("✅ Account created successfully!");
+      } else {
+        await signInWithEmailAndPassword(auth, formData.email, formData.password);
+        alert("✅ Login successful!");
+      }
+      navigate("/"); // redirect to home
+    } catch (error) {
+      alert(error.message);
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-100 to-orange-200 px-4">
-      <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md transform transition-all duration-500">
-        <h2 className="text-3xl font-extrabold text-orange-600 mb-6 text-center drop-shadow-sm">
-          {isSignUp ? "Create an Account" : "Welcome"}
+      <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
+        <h2 className="text-3xl font-extrabold text-orange-600 mb-6 text-center">
+          {isSignUp ? "Create an Account" : "Welcome Back"}
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-5">
@@ -38,8 +53,7 @@ const SignIn = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                placeholder="Enter your name"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400"
               />
             </div>
           )}
@@ -52,8 +66,7 @@ const SignIn = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              placeholder="Enter your email"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400"
             />
           </div>
 
@@ -65,14 +78,13 @@ const SignIn = () => {
               value={formData.password}
               onChange={handleChange}
               required
-              placeholder="Enter your password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2.5 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2.5 rounded-lg"
           >
             {isSignUp ? "Sign Up" : "Sign In"}
           </button>
@@ -80,7 +92,7 @@ const SignIn = () => {
 
         <div className="text-center mt-5">
           {isSignUp ? (
-            <p className="text-gray-700">
+            <p>
               Already have an account?{" "}
               <button
                 onClick={() => setIsSignUp(false)}
@@ -90,7 +102,7 @@ const SignIn = () => {
               </button>
             </p>
           ) : (
-            <p className="text-gray-700">
+            <p>
               Don’t have an account?{" "}
               <button
                 onClick={() => setIsSignUp(true)}
