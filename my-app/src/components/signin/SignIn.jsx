@@ -37,9 +37,9 @@ const SignIn = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-100 to-orange-200 px-4">
-      <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
-        <h2 className="text-3xl font-extrabold text-orange-600 mb-6 text-center">
+    <div className="min-h-screen flex items-center justify-center bg-white px-4">
+      <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md border border-red-100">
+        <h2 className="text-3xl font-extrabold text-red-600 mb-6 text-center">
           {isSignUp ? "Create an Account" : "Welcome Back"}
         </h2>
 
@@ -53,7 +53,7 @@ const SignIn = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-400"
               />
             </div>
           )}
@@ -66,7 +66,7 @@ const SignIn = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-400"
             />
           </div>
 
@@ -78,13 +78,13 @@ const SignIn = () => {
               value={formData.password}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-400"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2.5 rounded-lg"
+            className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 rounded-lg transition-all"
           >
             {isSignUp ? "Sign Up" : "Sign In"}
           </button>
@@ -96,7 +96,7 @@ const SignIn = () => {
               Already have an account?{" "}
               <button
                 onClick={() => setIsSignUp(false)}
-                className="text-orange-500 font-semibold hover:underline"
+                className="text-red-600 font-semibold hover:underline"
               >
                 Sign In
               </button>
@@ -106,7 +106,7 @@ const SignIn = () => {
               Don’t have an account?{" "}
               <button
                 onClick={() => setIsSignUp(true)}
-                className="text-orange-500 font-semibold hover:underline"
+                className="text-red-600 font-semibold hover:underline"
               >
                 Sign Up
               </button>
