@@ -5,15 +5,14 @@ import { useAuth } from "../../context/AuthContext";
 
 const HealthDashboard = () => {
   const navigate = useNavigate();
-  const { user } = useAuth(); // check logged in user
+  const { user } = useAuth(); // logged in user
   const [showModal, setShowModal] = useState(false);
 
-  const handleCardClick = () => {
+  const handleCardClick = (path) => {
     if (!user) {
-      setShowModal(true); // only show popup if not logged in
+      setShowModal(true); // show popup if not logged in
     } else {
-      // User is logged in → here you can add actual functionality later
-      console.log("Card clicked, user is logged in!");
+      if (path) navigate(path);
     }
   };
 
@@ -28,14 +27,14 @@ const HealthDashboard = () => {
 
   return (
     <div className="min-h-screen bg-white px-6 sm:px-12 py-24">
-      <h1 id="HD" className="text-4xl md:text-5xl font-extrabold text-red-600 mb-20 text-center">
+      <h1 className="text-4xl md:text-5xl font-extrabold text-red-600 mt-8 mb-12 text-center">
         Your Health Dashboard
       </h1>
 
       <div className="max-w-5xl mx-auto grid sm:grid-cols-1 md:grid-cols-3 gap-8">
         {/* Upload Report */}
         <div
-          onClick={handleCardClick}
+          onClick={() => handleCardClick(null)}
           className="cursor-pointer bg-gradient-to-br from-red-50 to-red-100 hover:scale-105 transform transition-all rounded-2xl p-8 text-center shadow-lg"
         >
           <div className="flex justify-center mb-4 text-red-600 text-4xl">
@@ -49,7 +48,7 @@ const HealthDashboard = () => {
 
         {/* Manual Input Vitals */}
         <div
-          onClick={handleCardClick}
+          onClick={() => handleCardClick("/vitals")}
           className="cursor-pointer bg-gradient-to-br from-red-50 to-red-100 hover:scale-105 transform transition-all rounded-2xl p-8 text-center shadow-lg"
         >
           <div className="flex justify-center mb-4 text-red-600 text-4xl">
@@ -63,7 +62,7 @@ const HealthDashboard = () => {
 
         {/* AI Reports Explain */}
         <div
-          onClick={handleCardClick}
+          onClick={() => handleCardClick(null)}
           className="cursor-pointer bg-gradient-to-br from-red-50 to-red-100 hover:scale-105 transform transition-all rounded-2xl p-8 text-center shadow-lg"
         >
           <div className="flex justify-center mb-4 text-red-600 text-4xl">
@@ -76,7 +75,7 @@ const HealthDashboard = () => {
         </div>
       </div>
 
-      {/* Custom Popup Modal */}
+      {/* Popup if not logged in */}
       {!user && showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
           <div className="bg-white rounded-2xl p-8 w-80 sm:w-96 text-center shadow-xl">

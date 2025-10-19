@@ -23,17 +23,18 @@ const HeroSection = () => {
       <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-red-600 leading-tight mb-6">
         Manage Your Healths, Reports and Vitals
       </h1>
-      <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl">
+      <p className="text-lg sm:text-xl text-gray-600 mb-12 max-w-2xl">
         Keep track of your health data, monitor your reports, and manage your vitals easily and securely.
       </p>
-      <div>
-        <button
-          onClick={handleGetStarted}
-          className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-full text-lg font-semibold transition-all"
-        >
-          Get Started
-        </button>
-      </div>
+
+      {/* Beautiful Get Started Button */}
+      <button
+        onClick={handleGetStarted}
+        className="relative inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-red-500 to-red-700 text-white font-bold text-lg rounded-full shadow-lg overflow-hidden transform transition-all hover:scale-105"
+      >
+        <span className="absolute inset-0 bg-red-600 opacity-30 rounded-full animate-pulse"></span>
+        <span className="relative z-10">✨ Get Started ✨</span>
+      </button>
 
       {/* Custom Modal */}
       {modalOpen && (
